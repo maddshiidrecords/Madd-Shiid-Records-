@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="Madd'Shiid Records – South Africa's top independent label for Hip Hop, R&amp;B, and Rock. Explore music, videos, and artists." name="description"/><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Madd'Shiid Records</title>
+<style>
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    line-height: 2;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 40px 20px;
+    height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .dark-theme {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .light-theme {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .dark-theme h1.title,
+  .dark-theme h2,
+  .dark-theme .section,
+  .dark-theme .content,
+  .dark-theme footer,
+  .dark-theme footer a {
+    color: #ccc;
+  }
+
+  .dark-theme footer a {
+    color: #888;
+  }
+
+  .light-theme h1.title,
+  .light-theme h2,
+  .light-theme .section,
+  .light-theme .content,
+  .light-theme footer,
+  .light-theme footer a {
+    color: #000;
+  }
+
+  .light-theme footer a {
+    color: #000;
+  }
+
+  /* Existing layout styles continue below */
+  h1.title {
+    font-weight: bolder;
+    font-size: 18px;
+    text-align: left;
+    margin: 0 0 5px 0;
+    padding-top: 20px;
+    border-bottom: 4px double currentColor;
+    width: max-content;
+    user-select: none;
+  }
+
+  h2 {
+    font-size: 14px;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    user-select: none;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 40px auto 0;
+    height: calc(100vh - 110px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .circle-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 320px;
+    flex-wrap: nowrap;
+    width: 1920px;
+    height: auto;
+  }
+
+  .section {
+    cursor: pointer;
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    font-weight: bold;
+    font-size: 112px;
+    user-select: none;
+    width: auto;
+    position: static;
+    transition: color 0.3s ease;
+  }
+
+  .section.active {
+    color: currentColor;
+  }
+
+  .icon svg {
+    stroke: currentColor;
+    width: 112px;
+    height: 112px;
+    flex-shrink: 0;
+  }
+
+  .content {
+    display: none;
+    margin-top: 10px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  iframe {
+    display: block;
+    margin: 12px 0 24px 0;
+    width: 250px;
+    height: 300px;
+    border: none;
+    border-radius: 8px;
+  }
+
+  img {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px 10px 50px;
+    font-size: 16px;
+    position: relative;
+  }
+
+  footer .social-links {
+    margin-bottom: 30px;
+  }
+
+  footer a {
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    user-select: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1200px) {
+    .circle-menu {
+      width: 720px;
+      gap: 100px;
+    }
+
+    .section {
+      font-size: 42px;
+      gap: 20px;
+    }
+
+    .icon svg {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    body {
+      font-size: 16px;
+      padding: 30px 15px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+    }
+
+    .circle-menu {
+      width: 260px;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .section {
+      font-size: 18px;
+      gap: 15px;
+    }
+
+    .icon svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  animation: fadeSlideIn 1s ease forwards;
+}
+
+
+
+.section:hover {
+  color: #cc3366;
+  text-decoration: none;
+  transform: scale(1.05);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Artist links color */
+#artistContent a {
+  color: #cc3366;
+  transition: color 0.1s ease;
+}
+#artistContent a:hover {
+  text-decoration: underline;
+  color: #ff4d88;
+}
+
+
+.section.rotated {
+  transform: rotate(360deg);
+  transition: transform 1s ease;
+}
+
+</style>
+<script>
+    function toggle(contentId, element) {
+      const content = document.getElementById(contentId);
+      const isVisible = content.style.display === 'block';
+
+      // Hide all content and remove active classes
+      document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+      // Toggle the clicked content
+      if (!isVisible) {
+        content.style.display = 'block';
+        element.classList.add('active');
+      }
+    }
+  </script>
+<script>
+  function toggleDropdown(id) {
+    document.querySelectorAll('.dropdown-content').forEach(el => {
+      if (el.id !== id) el.style.display = 'none';
+    });
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+</head>
+<body class="dark-theme">
+<button aria-label="Toggle Theme" onclick="toggleTheme()" style="position: fixed; top: 20px; right: 20px; background: none; border: none; cursor: pointer;">
+<svg fill="none" height="24" stroke="#888" stroke-width="2" viewbox="0 0 24 24" width="24">
+<circle cx="12" cy="12" r="9"></circle>
+</svg>
+</button>
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle("dark-theme");
+    body.classList.toggle("light-theme");
+  }
+</script>
+<h1 class="title" id="title">Madd'Shiid Records</h1>
+<div class="container">
+<div class="circle-menu">
+<div class="section" id="music" onclick="toggle('musicContent', this)">
+<span aria-hidden="true" class="icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-8l-2-2H5a2 2 0 0 0-2 2z"></path>
+</svg>
+</span>
+        Music
+      </div>
+<div class="section" id="videos" onclick="toggle('videosContent', this)">
+<span aria-hidden="true" class="icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6l2 3h8a2 2 0 0 1 2 2z"></path>
+</svg>
+</span>
+        Videos
+      </div>
+<div class="section" id="extras" onclick="toggle('extrasContent', this)">
+<span aria-hidden="true" class="icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6l2 3h8a2 2 0 0 1 2 2z"></path>
+</svg>
+</span>
+        Extras
+      </div>
+</div>
+</div>
+<!-- Music content -->
+<div class="content" id="musicContent"><h2 style="font-size:16px; border-bottom: 1px solid #555; padding-bottom: 5px;">Albums</h2><h3>Desire</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/4mXy0mqlcfBFlu1zHtQ8Xm" style="border-radius:12px" width="250"></iframe><h3>Overdrive 2</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/7zOv8SBNCBCXeBPW4GR1dS" style="border-radius:12px" width="250"></iframe><h3>Overdrive</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/3zDCFoQHu4NnIRn5xSEh4a" style="border-radius:12px" width="250"></iframe><h3>Music Is Fun</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/0NVrfpt4ziREjhkLFHezuh" style="border-radius:12px" width="250"></iframe><h3>Spacejam</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/7JNzNRJNa5TEnxlCkO8y22" style="border-radius:12px" width="250"></iframe><h3>Love Lingo</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/1eUT5nwSf4MiYSwxYKMWIi" style="border-radius:12px" width="250"></iframe><h3>I Don’t Care</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/5dj3rIY291kHpLXb0LdoPI" style="border-radius:12px" width="250"></iframe><h2 style="font-size:16px; border-bottom: 1px solid #555; padding-bottom: 5px;">EPs</h2><h3>Black EP</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/01QlRiEDJd0G7mYsscFQlw" style="border-radius:12px" width="250"></iframe><h3>Meanwhile in Quarantine</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/2HrHGTPYNtUYwig0lKuUnP" style="border-radius:12px" width="250"></iframe><h3>Meanwhile in Quarantine 2</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/2daKqCceX7A62Er8EXgpOo" style="border-radius:12px" width="250"></iframe><h3>Girls 2</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/73Q6AM5XIUE6kUjcX5IxnX" style="border-radius:12px" width="250"></iframe><h3>Girls</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/0zw5njDEDzQCHjGlDH1F1E" style="border-radius:12px" width="250"></iframe><h3>7:11</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/4kxYuPH26KPnrPVAyrwIO9" style="border-radius:12px" width="250"></iframe><h3>Drama EP</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/0sCnuzFpcX4LhYxP5KlaQt" style="border-radius:12px" width="250"></iframe><h3>Anything to escape EP</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/1rde1P2Dk3hqrTwRer2p1M" style="border-radius:12px" width="250"></iframe><h2 style="font-size:16px; border-bottom: 1px solid #555; padding-bottom: 5px;">Instrumentals</h2><h3>Spacejam (Instrumental)</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/1ZaSdzkdhI95R2ZzTfNDWR" style="border-radius:12px" width="250"></iframe><h3>Desire (Instrumental)</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/7rPPqMi2vLOxRxCSZCdsdm" style="border-radius:12px" width="250"></iframe><h3>Overdrive (Instrumental)</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/3uz337A23QUmMhzh2GNioR" style="border-radius:12px" width="250"></iframe><h3>Shawdy Wassup (Instrumental)</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/0GEKGbXW0iCsrWUFFyPTWz" style="border-radius:12px" width="250"></iframe><h3>Overdrive 2 (Instrumental)</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/3YJRkQxqbkfs1nSihxZsEu" style="border-radius:12px" width="250"></iframe><h3>Girls 2 (Instrumental)</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/5W2CYWgtNx04AFcCDW8f4J" style="border-radius:12px" width="250"></iframe><h3>The Wxr Rxxm 2</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/7MPLcM2FvnRHU8zWELVYgn" style="border-radius:12px" width="250"></iframe><h3>Essentials</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/track/1MoMyYYBjsOE0x8bEN6bag" style="border-radius:12px" width="250"></iframe>
+<h3>The Wxr Rxxm</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/track/3A8bdmEZ1haN5RrExTR2jM" style="border-radius:12px" width="250"></iframe><h2 style="font-size:16px; border-bottom: 1px solid #555; padding-bottom: 5px;">Singles</h2><h3>Overload</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/3m7IOF8Pxmp5TmbnOagGyJ" style="border-radius:12px" width="250"></iframe><h3>CODM</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/6uZr6T9SZP5TbHJgQ6gXpB" style="border-radius:12px" width="250"></iframe><h3>Project X</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/2VpmMUNyKvMGourXYOxuFz" style="border-radius:12px" width="250"></iframe><h3>Handle it (ft. Breed XI)</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/2Gk2YY2X78lAeNaOORg6wF" style="border-radius:12px" width="250"></iframe><h3>What If??</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/6z5t4PJZL6kQpYKR1hLxZM" style="border-radius:12px" width="250"></iframe><h3>Life is GTA</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/7k0Ru4R0uWh6B3EygQ36vu" style="border-radius:12px" width="250"></iframe><h3>9 to 5</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/5LmvNYgKSQmp7ykjCDLg9g" style="border-radius:12px" width="250"></iframe><h3>Bandz</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/6NAkec4GfIhmgtH6EhJHPH" style="border-radius:12px" width="250"></iframe><h3>Whole new Lane</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/5dpueA72PcpAEgyes8DLnH" style="border-radius:12px" width="250"></iframe><h3>Mvumele</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/2pyNswAtkBi6mbNz1FdWyV" style="border-radius:12px" width="250"></iframe><h3>Soft landing</h3><iframe allow="encrypted-media" frameborder="0" height="300" loading="lazy" src="https://open.spotify.com/embed/album/0Tr3uCMrLRLRzkXeUwjeI5" style="border-radius:12px" width="250"></iframe></div>
+<!-- Videos content -->
+<div class="content" id="videosContent">
+<h2>• Video 1</h2>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/CskoEIGxw1k"></iframe>
+<h2>• Video 2</h2>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/j9ZcmQLiDI8"></iframe>
+<h2>• Video 3</h2>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/j9ZcmQLiDI8"></iframe>
+<h2>• Video 4</h2>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/mbHERvFGkwU"></iframe>
+<h2>• Video 5</h2>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/TefPN-cjIHc"></iframe>
+<h2>• Video 6</h2>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/LvR3b2XNdc8"></iframe>
+<h2>• Video 7</h2>
+<iframe allow="autoplay; encrypted-media" allowfullscreen="" src="https://www.youtube.com/embed/97euSQ8xhaA"></iframe>
+<h2>• Video 8</h2>
+<iframe allowfullscreen="" frameborder="0" height="300" src="https://www.youtube.com/embed/tPTru_1i8PE" width="250"></iframe>
+<h2>• Video 9</h2>
+<iframe allowfullscreen="" frameborder="0" height="300" src="https://www.youtube.com/embed/70i4rBbJPtw" width="250"></iframe>
+</div>
+<!-- Photos content -->
+<div class="content" id="extrasContent">
+<div class="dropdown" onclick="toggleDropdown('aboutContent')">
+<h2>1. About</h2>
+</div>
+<div class="dropdown-content" id="aboutContent" style="display: none;">
+<p><strong>Madd'Shiid Records</strong> is South Africa's leading independent music label, redefining <strong>Hip Hop</strong>, <strong>Rock</strong>, and <strong>R&amp;B</strong>. We empower visionary artists, push boundaries, and <strong>shape the future of SA music</strong>. Discover the latest releases from South Africa's most exciting independent music label.</p>
+</div>
+<div class="dropdown" onclick="toggleDropdown('artistContent')">
+<h2>2. Artist</h2>
+</div>
+<div class="dropdown-content" id="artistContent" style="display: none;">
+<ul>
+<li><a href="https://facebook.com/BreedXI" target="_blank">Breed XI</a></li>
+<li><a href="https://facebook.com/hassanblackza" target="_blank">Hassan Black</a></li>
+<li><a href="https://www.facebook.com/share/1AfKE6kEsp/" target="_blank">HomieLee</a></li>
+<li><a href="https://www.facebook.com/profile.php?id=61551409497408&amp;mibextid=ZbWKwL" target="_blank">Caesar_056</a></li>
+</ul>
+</div>
+<div class="dropdown" onclick="toggleDropdown('newsletterContent')">
+<h2>3. Newsletter Sign Up</h2>
+</div>
+<div class="dropdown-content" id="newsletterContent" style="display: none;">
+<form action="https://formspree.io/f/manjnqve" method="POST">
+<input name="email" placeholder="Enter your email" required="" style="padding: 8px; font-size: 16px; border: none; border-radius: 4px; margin-right: 10px;" type="email"/>
+<button style="padding: 8px 12px; font-size: 16px; border: none; border-radius: 4px; background-color: #ccc; color: #000;" type="submit">Sign Up</button>
+</form>
+</div>
+
+<div class="dropdown" onclick="toggleDropdown('gamesContent')">
+  <h2>4. Games</h2>
+</div>
+<div class="dropdown-content" id="gamesContent" style="display: none;">
+  <ul style="list-style-type: none; padding: 0;">
+    <li><button onclick="document.getElementById('tapDotGame').style.display='block'" style="padding: 6px 12px; margin: 6px 0;">Tap Moving Dot</button></li>
+  </ul>
+  <div id="tapDotGame" style="display: none; margin-top: 10px;">
+    <iframe srcdoc="
+  <style>
+    body { margin:0; overflow:hidden; font-family: sans-serif; background: #000; color: white; }
+    #dot {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #cc3366;
+      cursor: pointer;
+      display: none;
+    }
+    #hud {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 16px;
+      background: rgba(0,0,0,0.6);
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+    #controls {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      background: #cc3366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  
+.section.rotated {
+  transform: rotate(360deg);
+  transition: transform 1s ease;
+}
+
+</style>
+  <body>
+    <div id='dot'></div>
+    <div id='hud'>Time: 60.0s | Score: 0</div>
+    <div id='controls'>
+      <button onclick='startGame()'>Start Game</button>
+    </div>
+    <script>
+      const dot = document.getElementById('dot');
+      const hud = document.getElementById('hud');
+      const controls = document.getElementById('controls');
+
+      let score = 0, timeLeft = 60, startTime = null, moveInterval = null, animationFrame = null;
+
+      function updateHUD() {
+        const elapsed = (Date.now() - startTime) / 1000;
+        const remaining = Math.max(0, 60 - elapsed).toFixed(1);
+        hud.textContent = 'Time: ' + remaining + 's | Score: ' + score;
+
+        if (elapsed >= 60) {
+          endGame();
+        } else {
+          animationFrame = requestAnimationFrame(updateHUD);
+        }
+      }
+
+      function startGame() {
+        score = 0;
+        startTime = Date.now();
+        hud.textContent = 'Time: 60.0s | Score: 0';
+        controls.innerHTML = '';
+        dot.style.display = 'block';
+
+        moveInterval = setInterval(() => {
+          dot.style.left = Math.random() * (window.innerWidth - 40) + 'px';
+          dot.style.top = Math.random() * (window.innerHeight - 40) + 'px';
+        }, 400);
+
+        updateHUD();
+      }
+
+      function endGame() {
+        clearInterval(moveInterval);
+        cancelAnimationFrame(animationFrame);
+        dot.style.display = 'none';
+        const result = score >= 12 ? 'You Win!' : 'Time\'s up!';
+        controls.innerHTML = '<div>' + result + '<br/>Score: ' + score + '</div><button onclick=\'startGame()\'>Retry</button>';
+      }
+
+      dot.onclick = () => {
+        score++;
+        if (score >= 12) {
+          endGame();
+        }
+      };
+    </script>
+  
+<script>
+  document.querySelectorAll('.section').forEach(section => {
+    section.addEventListener('dblclick', () => {
+      section.classList.toggle('rotated');
+    });
+  });
+</script>
+
+
+<script>
+  document.querySelectorAll('.section').forEach(section => {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    section.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    section.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe(section);
+    });
+
+    function handleSwipe(section) {
+      if (Math.abs(touchEndX - touchStartX) > 50) {
+        section.classList.add('rotated');
+        setTimeout(() => {
+          section.classList.remove('rotated');
+        }, 1000);
+      }
+    }
+  });
+</script>
+
+</body>" style="width:100%; height:300px; border:none;"></iframe>
+  </div>
+</div>
+
+</div>
+<footer>
+<div aria-label="Social media links" class="social-links">
+<a aria-label="Facebook" href="https://www.facebook.com/maddshiid999" rel="noopener noreferrer" target="_blank">Facebook</a>
+<a aria-label="Instagram" href="https://instagram.com/maddshiidrecords" rel="noopener noreferrer" target="_blank">Instagram</a>
+<a aria-label="YouTube" href="https://www.youtube.com/@maddshiidrecords" rel="noopener noreferrer" target="_blank">YouTube</a>
+</div>
+<hr style="border: 1px solid #555; max-width: 200px; margin: 10px auto;"/>
+<div>© 2026 Madd'Shiid Records. All rights reserved.</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.section').forEach(section => {
+    section.addEventListener('dblclick', () => {
+      section.classList.toggle('rotated');
+    });
+  });
+</script>
+
+
+<script>
+  document.querySelectorAll('.section').forEach(section => {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    section.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    section.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe(section);
+    });
+
+    function handleSwipe(section) {
+      if (Math.abs(touchEndX - touchStartX) > 50) {
+        section.classList.add('rotated');
+        setTimeout(() => {
+          section.classList.remove('rotated');
+        }, 1000);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
